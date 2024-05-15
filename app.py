@@ -4,17 +4,10 @@ import os
 
 
 import streamlit as st
-# Ensure the setup script is run
-setup_script_path = './setup.sh'
-if os.path.exists(setup_script_path):
-    result = subprocess.run([setup_script_path], capture_output=True, text=True, shell=True)
-    st.write(f"Setup script output: {result.stdout}")
-    if result.returncode != 0:
-        st.write(f"Error running setup script: {result.stderr}")
-    else:
-        st.write("Setup script ran successfully")
-else:
-    st.write("Setup script not found")
+# Initialize and update submodule
+subprocess.call(['git', 'submodule', 'init'])
+subprocess.call(['git', 'submodule', 'update'])
+
 import tempfile
 import os
 from pydub import AudioSegment
